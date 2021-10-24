@@ -1,9 +1,21 @@
-# django_channels_chat_official_tutorial
-demo project for django channels tutorial
+# draw and guess
+based on django_channels_chat_official_tutorial_react project,
+create draw and guess game feature.
 
+# demo
+draw page: when you are painting on this page
+![avatar](./demo/draw.png)
 
-# code from tutorial page:
+guess page: guesser can watch the drawing lively.
+![avatar](./demo/guess.png)
+
+# reference
+## react-sketch2
+https://www.npmjs.com/package/react-sketch2
+
+## django channels
 https://channels.readthedocs.io/en/stable/tutorial/index.html
+
 
 # RUN
 
@@ -12,6 +24,13 @@ https://channels.readthedocs.io/en/stable/tutorial/index.html
 ```
 npm run build
 ```
+
+## frontend development(optional)
+
+```
+npm start
+```
+
 
 ## start redis server
 

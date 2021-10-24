@@ -4,9 +4,11 @@ create draw and guess game feature.
 
 # demo
 draw page: when you are painting on this page
+
 ![avatar](./demo/draw.png)
 
 guess page: guesser can watch the drawing lively.
+
 ![avatar](./demo/guess.png)
 
 # reference

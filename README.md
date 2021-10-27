@@ -37,18 +37,16 @@ npm start
 ## start redis server
 
 ```
-pip3 install -U channels_redis
-
 docker run -p 6379:6379 -d redis:5
 ```
 
 ## start dev server
 ```
-pip3 install -U channels
-
 cd backend
 
-python3 manage.py runserver
+pipenv install
+
+pipenv run python3 manage.py runserver
 ```
 
 ## access chat page

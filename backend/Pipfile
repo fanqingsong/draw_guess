@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "==3.2.8"
+djoser = "==2.0.5"
+djangorestframework = "==3.11.1" # https://github.com/sunscrapers/djoser/issues/541
+markdown = "==3.3"
+django-filter = "==21.1"
+channels-redis = "*"
+channels = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6.8"

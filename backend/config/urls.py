@@ -18,6 +18,8 @@ from django.conf.urls import include
 from django.urls import path
 from django.views.generic.base import TemplateView
 
+from accounts.urls import accounts_urlpatterns
+
 urlpatterns = [
     # SPA entry page 
     path('',TemplateView.as_view(template_name="index.html")),
@@ -25,3 +27,5 @@ urlpatterns = [
     path('chat/', include('chat.urls')),
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += accounts_urlpatterns #

@@ -4,11 +4,13 @@ import {Chat} from "./components/chat";
 import {Draw} from "./components/draw";
 import {Guess} from "./components/guess";
 
+import Menus from "./components/menus";
+
 import React from 'react';
 import './App.css';
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Switch,
   Redirect
@@ -16,101 +18,75 @@ import {
 
 import { Link } from "react-router-dom";
 
-import { Layout, Menu, Breadcrumb } from 'antd';
-// import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
 
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+import { Layout, Menu, Breadcrumb, PageHeader  } from 'antd';
+import { Row, Col, Divider } from 'antd';
+import { UserOutlined, HomeOutlined, NotificationOutlined } from '@ant-design/icons';
+
+import { Provider } from "react-redux";
+import store from "./store";
 
 
+const { Header, Content, Footer, Sider,  } = Layout;
 
-class SiderDemo extends React.Component {
+class App extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <Header className="header">
-          <div className="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">Chat</Menu.Item>
-            <Menu.Item key="2">Draw&Guess</Menu.Item>
-          </Menu>
-        </Header>
+      <Provider store={store}>
         <Router>
           <Layout>
-            <Sider width={200} className="site-layout-background">
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['5']}
-                defaultOpenKeys={['sub2']}
-                style={{ height: '100%', borderRight: 0 }}
-              >
-                <SubMenu key="sub1" title="Chat System">
-                  <Menu.Item key="1">
-                    <Link to="/selectRoom" className="nav-link">
-                      Select Room
-                    </Link>
-                  </Menu.Item>
+            <Header style={{background:"azure", minHeight: 140,}}>
+              <Row>
+                <Col flex="60px">
+                  <Link to="/">
+                    <Avatar shape="square" size={50} icon={<HomeOutlined />} />
+                  </Link>
+                </Col>
+                <Col flex="auto">
+                  <PageHeader
+                    title="Draw and Guess"
+                    subTitle="This is a funny site of great interest."
+                  />
+                </Col>
+              </Row>
 
-                  <Menu.Item key="2">
-                    <Link to="/chat/lobby" className="nav-link">
-                      Chat
-                    </Link>
-                  </Menu.Item>
-
-                  {/* <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item> */}
-                </SubMenu>
-                <SubMenu key="sub2" title="Draw&Guess">
-                  <Menu.Item key="5">
-                    <Link to="/draw" className="nav-link">
-                      Draw
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key="6">
-                    <Link to="/guess" className="nav-link">
-                      Guess
-                    </Link>
-                  </Menu.Item>
-                  {/* <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item> */}
-                </SubMenu>
-                {/* <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu> */}
-              </Menu>
-            </Sider>
-            <Layout style={{ padding: '0 24px 24px' }}>
-              {/* <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Chat System</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
-              </Breadcrumb> */}
-              <Content
-                className="site-layout-background"
-                style={{
-                  padding: 24,
-                  margin: 0,
-                  minHeight: 280,
-                }}
-              >
-                <Switch>
-                  <Route exact path="/" component={SelectRoom} />
-                  <Route exact path="/selectRoom" component={SelectRoom} />
-                  <Route exact path="/chat/:id" component={Chat} />
-                  <Route exact path="/draw" component={Draw} />
-                  <Route exact path="/guess" component={Guess} />
-                </Switch>
-              </Content>
+              <Row>
+                <Col flex="auto">
+                  <Menus/>
+                </Col>
+                <Col flex="100px">
+                  <Avatar shape="square" size={50} icon={<UserOutlined />} />
+                </Col>
+              </Row>
+            </Header>
+            <Layout>
+              <Layout style={{ padding: '0 24px 24px' }}>
+                <Content
+                  className="site-layout-background"
+                  style={{
+                    padding: 24,
+                    margin: 0,
+                    minHeight: 280,
+                  }}
+                >
+                  <Switch>
+                    <Route exact path="/" render={() => <Redirect to="/selectRoom" push />} /> 
+                    <Route exact path="/selectRoom" component={SelectRoom} />
+                    <Route exact path="/chat/:id" component={Chat} />
+                    <Route exact path="/draw" component={Draw} />
+                    <Route exact path="/guess" component={Guess} />
+                  </Switch>
+                </Content>
+              </Layout>
             </Layout>
+            <Footer align="center">@CopyRight 2021 LightSong</Footer>
           </Layout>
         </Router>
-      </Layout>
+      </Provider>
     );
   }
 }
 
-export default SiderDemo;
+export default App;

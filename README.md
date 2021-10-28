@@ -2,6 +2,29 @@
 based on django_channels_chat_official_tutorial_react project,
 create draw and guess game feature.
 
+# requirements
+
+## basics
+- [x] draw page, for artist, provide a sketch pad for artist to draw
+- [x] guess page, for gusser, display drawing at real time for gusser
+
+## authentication
+- [ ] display logging page if not logged by user.
+- [ ] display home page(draw & guess) if logged by user.
+
+
+# Technology Stack
+
+| Category | Name | Description |
+| ----------- | ----------- | ----------- |
+| Backend | Django | web framework |
+| Backend | DRF | web framework of RESTAPI |
+| Backend | Channels | websocket server library |
+| Backend | djoser | authentication library based on DRF |
+| Frontend | React | frontend library |
+| Frontend | AntDesign | frontend UI library |
+| Frontend | react-sketch2 | Canvas Drawing UI library |
+
 # demo
 draw page: when you are painting on this page
 
@@ -49,15 +72,27 @@ pipenv install
 pipenv run python3 manage.py runserver
 ```
 
-## access chat page
+## access page
 go to chrome, access the following URL:
-http://127.0.0.1:8000/chat/
+http://127.0.0.1:8000/
 
-enter lobby, then click Enter to go to room page
+enter draw page
 
-## on chat room page
-http://127.0.0.1:8000/chat/lobby/
+then open another chrome window, access URL
+http://127.0.0.1:8000/
 
+enter guess page
+
+finally, keep two page visible, then draw and guess.
+
+
+# Dev
+
+## DB migrate
+
+```
+pipenv run python3 manage.py  migrate
+```
 
 
 

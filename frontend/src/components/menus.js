@@ -7,12 +7,16 @@ const Menus = (props) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        props.history.listen(route => { 
+        let UNLISTEN = props.history.listen(route => { 
             console.log("------------------")
             console.log(route); 
 
             setCount(count+1);
           });
+
+          return () => {
+            UNLISTEN()
+          };
       }, [count]);
 
     console.log("----========= ")

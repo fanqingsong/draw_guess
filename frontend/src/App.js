@@ -39,9 +39,9 @@ class App extends React.Component {
           <Layout>
             <Header style={{background:"azure", minHeight: 140,}}>
               <Row>
-                <Col flex="60px">
+                <Col flex="100px">
                   <Link to="/">
-                    <Avatar shape="square" size={50} icon={<HomeOutlined />} />
+                    <Avatar shape="square" size={80} icon={<HomeOutlined />} />
                   </Link>
                 </Col>
                 <Col flex="auto">
@@ -62,12 +62,17 @@ class App extends React.Component {
               </Row>
             </Header>
             <Layout>
-              <Layout style={{ padding: '0 24px 24px' }}>
+              <Layout 
+                style={{ 
+                  padding: '0 24px 24px',
+                  // margin:'0 auto'
+                }}
+              >
                 <Content
                   className="site-layout-background"
                   style={{
                     padding: 24,
-                    margin: 0,
+                    margin: "0 auto",
                     minHeight: 280,
                   }}
                 >
@@ -79,6 +84,11 @@ class App extends React.Component {
                     <Route exact path="/guess" component={Guess} />
                   </Switch>
                 </Content>
+
+                {/* for user info */}
+                <Sider style={{maxWidth: 380, background:"azure"}}>
+                  user info
+                </Sider>
               </Layout>
             </Layout>
             <Footer align="center">@CopyRight 2021 LightSong</Footer>

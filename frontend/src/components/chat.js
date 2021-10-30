@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
 
-export class Chat extends Component {
+
+
+class Chat extends Component {
     state = {
         chat_logs: "",
         one_sentence: ""
@@ -13,7 +16,8 @@ export class Chat extends Component {
 
         const chatSocket = new WebSocket(
             'ws://'
-            + window.location.host
+            // + window.location.host
+            + '127.0.0.1:8000'
             + '/ws/chat/'
             + room_name
             + '/'
@@ -23,7 +27,7 @@ export class Chat extends Component {
             let chat_logs = this.state.chat_logs;
             
             const data = JSON.parse(e.data);
-            chat_logs += (data.message + '\n');
+            chat_logs += (`[${data.sender}]: ` + data.message + '\n');
 
             this.setState({chat_logs});
         };
@@ -44,6 +48,7 @@ export class Chat extends Component {
         let one_sentence = this.state.one_sentence;
 
         this.chatSocket.send(JSON.stringify({
+            'sender': this.props.isAuthenticated? this.props.me.username : 'Anonymous',
             'message': one_sentence
         }));
 
@@ -71,3 +76,12 @@ export class Chat extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+    me: state.auth.me
+  });
+  
+export default connect(
+    mapStateToProps,
+    null
+)(Chat);

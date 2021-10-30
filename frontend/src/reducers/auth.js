@@ -1,6 +1,5 @@
 import {
-    USER_LOADED,
-    USER_LOADING,
+    ME_LOADED,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
@@ -9,33 +8,24 @@ import {
 const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
-    isLoading: false,
-    user: null
+    me: null
 };
 
 const actionMap = {
-    USER_LOADING: (state, action) => {
-        return {
-            ...state, 
-            isLoading: true
-        };
-    },
-    USER_LOADED: (state, action) => {
+    ME_LOADED: (state, action) => {
         return {
             ...state,
             isAuthenticated: true,
-            isLoading: false,
-            user: action.payload
+            me: action.payload
         };
     },
     LOGIN_SUCCESS: (state, action) => {
-        localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("token", action.payload.auth_token);
 
         return {
             ...state,
-            ...action.payload,
+            token: action.payload.auth_token,
             isAuthenticated: true,
-            isLoading: false
         };
     },
     LOGOUT_SUCCESS: (state, action) => {
@@ -44,9 +34,8 @@ const actionMap = {
         return {
             ...state,
             token: null,
-            user: null,
+            me: null,
             isAuthenticated: false,
-            isLoading: false
         };
     },
     LOGIN_FAIL: (state, action) => {
@@ -55,9 +44,8 @@ const actionMap = {
         return {
             ...state,
             token: null,
-            user: null,
+            me: null,
             isAuthenticated: false,
-            isLoading: false
         };
     }
 };

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    "corsheaders",
     # 
     'accounts' # add new application
 ]
@@ -63,6 +64,12 @@ DJOSER = {
     "USER_ID_FIELD": "username"
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3001",
+    "http://localhost:3001",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
 
 # Channels
 ASGI_APPLICATION = 'config.asgi.application'
@@ -79,6 +86,7 @@ CHANNEL_LAYERS = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

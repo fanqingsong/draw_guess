@@ -11,6 +11,7 @@ markdown = "==3.3"
 django-filter = "==21.1"
 channels-redis = "*"
 channels = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

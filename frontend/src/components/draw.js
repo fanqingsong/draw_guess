@@ -4,7 +4,10 @@ import React, { Component, Fragment } from "react";
 import {SketchField, Tools} from 'react-sketch2';
 
 import { Typography } from 'antd';
+import { Row, Col } from 'antd';
 
+
+import Chat from "./drawGuessChat";
 
 const { Title } = Typography;
 
@@ -22,9 +25,9 @@ export class Draw extends Component {
 
         const chatSocket = new WebSocket(
             'ws://'
-            + window.location.host
-            // + "127.0.0.1:8000"
-            + '/ws/chat/'
+            // + window.location.host
+            + "127.0.0.1:8000"
+            + '/ws/draw/'
             + room_name
             + '/'
         );
@@ -75,14 +78,22 @@ export class Draw extends Component {
             <Fragment>
                 <Title>Artist, please paint now!</Title>
 
-                <SketchField width='800px' 
-                         height='600px' 
-                         style={{background: "azure"}}
-                         tool={Tools.Pencil} 
-                         ref={(c) => (this._sketch = c)}
-                         onChange={this._onSketchChange}
-                         lineColor='black'
-                         lineWidth={3}/>
+                <Row align="center">
+                    <Col flex={2} align="right" style={{paddingRight:40}}>
+                        <SketchField width='800px' 
+                                height='600px' 
+                                style={{background: "azure"}}
+                                tool={Tools.Pencil} 
+                                ref={(c) => (this._sketch = c)}
+                                onChange={this._onSketchChange}
+                                lineColor='black'
+                                lineWidth={3}/>
+                    </Col>
+                    <Col flex={2} align="left">
+                        <Chat/>
+                    </Col>
+                </Row>
+
 
             </Fragment>
         );

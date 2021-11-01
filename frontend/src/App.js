@@ -72,7 +72,7 @@ export default () => {
                 className="site-layout-background"
                 style={{
                   padding: 24,
-                  margin: "0 auto",
+                  // margin: "0 auto",
                   minHeight: 280,
                 }}
               >

@@ -9,8 +9,9 @@ create draw and guess game feature.
 - [x] guess page, for gusser, display drawing at real time for gusser
 
 ## authentication
-- [ ] display logging page if not logged by user.
-- [ ] display home page(draw & guess) if logged by user.
+- [x] display logging pannel if not logged by user, then user can login
+- [x] display loggout pannel if logged by user, then user can logout
+- [ ] 
 
 
 # Technology Stack
@@ -42,34 +43,41 @@ https://www.npmjs.com/package/react-sketch2
 https://channels.readthedocs.io/en/stable/tutorial/index.html
 
 
+# INSTALL
+
+## prerequiste
+| software | version |
+|----------|---------|
+| python3  | 3.6.8  |
+| pipenv   |  2020.11.15 |
+| nodejs   | v14.17.0 |
+| yarn     | 1.22.10 |
+| docker   | 20.10.2 |
+
+
+## install dependency of frontend and backend
+```
+./bin/install.sh
+```
+
+# BUILD
+
+```
+./bin/build.sh
+```
+
 # RUN
 
-## frontend build
+## start react dev server
 
 ```
-npm run build
-```
-
-## frontend development(optional)
-
-```
-npm start
+./bin/start_react.sh
 ```
 
 
-## start redis server
-
+## start django server
 ```
-docker run -p 6379:6379 -d redis:5
-```
-
-## start dev server
-```
-cd backend
-
-pipenv install
-
-pipenv run python3 manage.py runserver
+./bin/start_django.sh
 ```
 
 ## access page

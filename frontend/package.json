@@ -9,6 +9,7 @@
         "antd": "^4.16.13",
         "axios": "^0.23.0",
         "react": "^16.7.0",
+        "react-color": "^2.19.3",
         "react-dom": "^16.7.0",
         "react-redux": "^7.2.5",
         "react-router-dom": "^5.3.0",

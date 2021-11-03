@@ -69,7 +69,7 @@ class Chat extends Component {
         return (
             <Fragment>
                 <textarea id="chat-log" cols="100" rows="20" value={chat_logs}></textarea><br/>
-                <input id="chat-message-input" type="text" size="100" onKeyUp={this.onKeyUp} autofocus="autofocus" onChange={this.onChange} value={one_sentence}/><br/>
+                <input id="chat-message-input" type="text" size="100" onKeyUp={this.onKeyUp} autoFocus="autoFocus" onChange={this.onChange} value={one_sentence}/><br/>
                 <input id="chat-message-submit" type="button" value="Send" onClick={this.onSubmit}/>
             </Fragment>
         );

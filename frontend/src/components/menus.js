@@ -25,7 +25,7 @@ const Menus = (props) => {
 
     return (
         <Menu theme="azure" mode="horizontal" selectedKeys={[pathname]} defaultSelectedKeys={[pathname]}>
-            <Menu.Item key="/selectRoom">
+            {/* <Menu.Item key="/selectRoom">
                 <Link to="/selectRoom" className="nav-link">
                     Select Room
                 </Link>
@@ -35,7 +35,7 @@ const Menus = (props) => {
                 <Link to="/chat/lobby" className="nav-link">
                     Chat
                 </Link>
-            </Menu.Item>
+            </Menu.Item> */}
 
             <Menu.Item key="/draw">
                 <Link to="/draw" className="nav-link">

@@ -77,9 +77,9 @@ export default () => {
                 }}
               >
                 <Switch>
-                  <Route exact path="/" render={() => <Redirect to="/selectRoom" push />} /> 
-                  <Route exact path="/selectRoom" component={SelectRoom} />
-                  <Route exact path="/chat/:id" component={Chat} />
+                  <Route exact path="/" render={() => <Redirect to="/draw" push />} /> 
+                  {/* <Route exact path="/selectRoom" component={SelectRoom} />
+                  <Route exact path="/chat/:id" component={Chat} /> */}
                   <Route exact path="/draw" component={Draw} />
                   <Route exact path="/guess" component={Guess} />
                 </Switch>

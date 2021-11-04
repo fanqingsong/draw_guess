@@ -3,16 +3,18 @@ import React, { Component, Fragment } from "react";
 
 import {SketchField, Tools} from 'react-sketch2';
 
-import { Typography } from 'antd';
-import { Row, Col } from 'antd';
-import { Card, Divider } from 'antd';
-import { Collapse, Select } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
-import { Slider, Input } from 'antd';
-import { Button, Space } from 'antd';
-import { Switch } from 'antd';
-import { debounce, throttle } from 'underscore'
-import { CompactPicker } from "react-color";
+import { 
+    Row, 
+    Col,
+    Divider,
+    Collapse,
+    Select,
+    Slider,
+    Input,
+    Button,
+    Space,
+    Switch,
+} from 'antd';
 
 import { 
     RedoOutlined, 
@@ -23,10 +25,18 @@ import {
     MinusOutlined,
     CloseOutlined, 
     CheckOutlined,
+    SettingOutlined,
     CloudDownloadOutlined,
+    SaveOutlined,
 } from '@ant-design/icons';
 
-const { Title } = Typography;
+import { debounce, throttle } from 'underscore'
+import { CompactPicker } from "react-color";
+
+import {saveDrawing} from "../actions/drawBoard" 
+import { connect } from "react-redux";
+
+
 const { Option } = Select;
 const { TextArea } = Input;
 const { Panel } = Collapse;
@@ -102,7 +112,6 @@ class DrawBoard extends Component {
         }));
     }, 2000)
 
-
     _onSketchChange = () => {
         let prev = this.state.canUndo;
         let now = this._sketch.canUndo();
@@ -147,6 +156,10 @@ class DrawBoard extends Component {
         anchor.download = "toPNG.png";
         anchor.click()
     };
+
+    _save = () => {
+        this.props.saveDrawing(this._sketch.toDataURL(), "test")
+    }
 
     _onSelectTool = (value) => {
         this.setState({
@@ -196,6 +209,11 @@ class DrawBoard extends Component {
                         type="primary"
                         icon={<CloudDownloadOutlined />}
                         onClick={() => this._download()}
+                    />
+                    <Button
+                        type="primary"
+                        icon={<SaveOutlined />}
+                        onClick={() => this._save()}
                     />
                 </Space>
 
@@ -329,5 +347,13 @@ class DrawBoard extends Component {
     }
 }
 
-export default DrawBoard;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+  });
+  
+export default connect(
+    mapStateToProps,
+    {saveDrawing}
+)(DrawBoard);
+
 

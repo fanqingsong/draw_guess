@@ -1,7 +1,7 @@
 
 import {SelectRoom} from "./components/selectRoom";
 import Chat from "./components/chat";
-import {Draw} from "./components/draw";
+import Draw from "./components/draw";
 import {Guess} from "./components/guess";
 
 import Menus from "./components/menus";

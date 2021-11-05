@@ -2,11 +2,11 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 
 
-
 class Chat extends Component {
     state = {
         chat_logs: "",
-        one_sentence: ""
+        one_sentence: "",
+        chat_count: 0,
     };
 
     componentDidMount () {
@@ -30,6 +30,16 @@ class Chat extends Component {
             chat_logs += (`[${data.sender}]: ` + data.message + '\n');
 
             this.setState({chat_logs});
+
+            let chat_count = this.state.chat_count;
+            chat_count++;
+            this.setState({chat_count})
+
+            console.log("call on message")
+            if(this.props.updateChatCount){
+                console.log("call update chat count")
+                this.props.updateChatCount(chat_count);
+            }
         };
 
         chatSocket.onclose = function(e) {
@@ -68,7 +78,7 @@ class Chat extends Component {
 
         return (
             <Fragment>
-                <textarea cols="50" rows="25" value={chat_logs} onChange={() => {}}></textarea><br/>
+                <textarea cols="50" rows="20" value={chat_logs} onChange={() => {}}></textarea><br/>
                 <input type="text" size="50" onKeyUp={this.onKeyUp} autoFocus="autoFocus" onChange={this.onChange} value={one_sentence}/><br/>
                 <input type="button" value="Send" onClick={this.onSubmit}/>
             </Fragment>

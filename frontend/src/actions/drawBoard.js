@@ -1,10 +1,25 @@
 
 import axios from "axios";
+import { DRAWINGS_LOADED } from "./types";
+
+export const loadDrawings = () => (dispatch, getState) => {
+  return axios
+    .get("http://127.0.0.1:8000/api/v1/drawings/", tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: DRAWINGS_LOADED,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+    //   dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
 
 
 // save drawing to db
 export const saveDrawing = (content, title) => (dispatch, getState) => {
-    let user = 1;
+    let user = getState().auth.me.id;
 
     return axios
       .post("http://127.0.0.1:8000/api/v1/drawings/", {

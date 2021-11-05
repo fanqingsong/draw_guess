@@ -4,16 +4,23 @@ import React, { Component, Fragment } from "react";
 import {SketchField, Tools} from 'react-sketch2';
 
 import { Typography } from 'antd';
-import { Row, Col } from 'antd';
+import { Row, Col, Card, Drawer, Space, Badge, Button } from 'antd';
 
-import Chat from "./drawGuessChat";
+import Chat from "./chatDrawGuess";
+
+
+import { 
+    MailOutlined,
+} from '@ant-design/icons';
 
 const { Title } = Typography;
 
 
 export class Guess extends Component {
     state = {
-        room_name: "drawing_broadcaster"
+        room_name: "drawing_broadcaster",
+        chatDrawerVisible: false,
+        chatCount: 0,
     };
 
     componentDidMount () {
@@ -37,7 +44,9 @@ export class Guess extends Component {
             const data = JSON.parse(e.data);
             let drawing = data.message;
 
-            this._sketch.setBackgroundFromDataUrl(drawing);
+            if(this._sketch){
+                this._sketch.setBackgroundFromDataUrl(drawing);
+            }
         };
 
         chatSocket.onclose = function(e) {
@@ -46,6 +55,22 @@ export class Guess extends Component {
 
         this.chatSocket = chatSocket;
     }
+
+    _updateChatCount = (value) => {
+        this.setState({chatCount: value});
+    }
+
+    _showChatDrawer = () => {
+        this.setState({
+            chatDrawerVisible: true,
+        });
+    };
+
+    _onChatDrawerClose = () => {
+        this.setState({
+            chatDrawerVisible: false,
+        });
+    };
 
     _onSketchChange = () => {
         console.log("changed");
@@ -64,25 +89,41 @@ export class Guess extends Component {
 
         return (
             <Fragment>
-                <Title>Guesser, watch the live paintting, then guess now!</Title>
+                <Title>Guesser, watch the live painting, then guess now!</Title>
+
+                <Space style={{ width: '100%' }}>
+                    <Badge count={this.state.chatCount} showZero>
+                        <Button
+                            type="primary"
+                            icon={<MailOutlined />}
+                            onClick={() => this._showChatDrawer()}
+                        />
+                    </Badge>
+                </Space>
 
 
-                <Row align="center">
-                    <Col flex={2} align="right" style={{paddingRight:40}}>
-                        <SketchField width='800px' 
-                            height='600px' 
-                            style={{background: "azure"}}
-                            tool={Tools.Pencil} 
-                            ref={(c) => (this._sketch = c)}
-                            onChange={this._onSketchChange}
-                            lineColor='black'
-                            lineWidth={3}/>
-                    </Col>
-                    <Col flex={2} align="left">
-                        <Chat/>
-                    </Col>
-                </Row>
+                <Drawer
+                    title="Chat with Artist."
+                    placement={'right'}
+                    closable={false}
+                    onClose={this._onChatDrawerClose}
+                    visible={this.state.chatDrawerVisible}
+                    // key={'right'}
+                    width={400}
+                    >
+                    <Chat updateChatCount={this._updateChatCount}/>
+                </Drawer>
 
+                <SketchField 
+                    // width='800px' 
+                    height='600px' 
+                    style={{background: "azure"}}
+                    // tool={Tools.Pencil} 
+                    ref={(c) => (this._sketch = c)}
+                    onChange={this._onSketchChange}
+                    lineColor='black'
+                    lineWidth={3}/>
+                    
             </Fragment>
         );
     }

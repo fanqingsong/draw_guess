@@ -14,7 +14,7 @@ import {
 // CHECK TOKEN & LOAD ME
 export const loadMe = () => (dispatch, getState) => {
   axios
-    .get("http://127.0.0.1:8000/api/v1/users/me/", tokenConfig(getState))
+    .get("http://127.0.0.1:8000/api/v1/users/medetail", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: ME_LOADED,

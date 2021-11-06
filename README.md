@@ -11,7 +11,13 @@ create draw and guess game feature.
 ## authentication
 - [x] display logging pannel if not logged by user, then user can login
 - [x] display loggout pannel if logged by user, then user can logout
-- [ ] 
+
+## gallery
+- [x] display all drawings.
+
+## comments
+- [ ] every user can give comment on every drawing.
+
 
 
 # Technology Stack
@@ -29,11 +35,16 @@ create draw and guess game feature.
 # demo
 draw page: when you are painting on this page
 
-![avatar](./demo/draw.png)
+![avatar](./snapshot/draw.png)
 
 guess page: guesser can watch the drawing lively.
 
-![avatar](./demo/guess.png)
+![avatar](./snapshot/guess.png)
+
+gallery page: disaply all drawings saved on server db.
+
+![avatar](./snapshot/gallery.png)
+
 
 # reference
 ## react-sketch2

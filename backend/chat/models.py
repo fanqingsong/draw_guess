@@ -7,7 +7,7 @@ from django.utils import timezone
 class Drawings(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    content = models.CharField(max_length=65535)
+    content = models.CharField(max_length=131070)
 
     class Meta:
         managed = True

@@ -1,6 +1,9 @@
 
 import axios from "axios";
-import { DRAWINGS_LOADED } from "./types";
+import { 
+  DRAWINGS_LOADED,
+  SET_MESSAGE,
+} from "./types";
 
 export const loadDrawings = () => (dispatch, getState) => {
   return axios
@@ -28,12 +31,16 @@ export const saveDrawing = (content, title) => (dispatch, getState) => {
           user     
       }, tokenConfig(getState))
       .then(res => {
-        // dispatch({
-        //   type: LOGOUT_SUCCESS
-        // });
+        dispatch({
+          type: SET_MESSAGE,
+          payload: {type:"success", content: "drawing saving is successful."}
+        });
       })
       .catch(err => {
-      //   dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({
+          type: SET_MESSAGE,
+          payload: {type:"error", content: "drawing saving is failed."}
+        });
       });
   };
 

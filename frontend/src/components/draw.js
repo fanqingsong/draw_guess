@@ -109,6 +109,11 @@ class Draw extends Component {
         this.props.loadDrawings();
     }
 
+    componentWillUnmount () {
+        this._broadcastDrawing.cancel();
+        this._changeLineWeight.cancel();
+    }
+
     _updateChatCount = (value) => {
         this.setState({chatCount: value});
     }

@@ -3,12 +3,12 @@ import axios from "axios";
 
 import {
   ME_LOADED,
-  AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  SET_MESSAGE,
 } from "./types";
 
 // CHECK TOKEN & LOAD ME
@@ -22,9 +22,6 @@ export const loadMe = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-      dispatch({
-        type: AUTH_ERROR
-      });
     });
 };
 
@@ -51,9 +48,13 @@ export const login = (username, password) => dispatch => {
       });
     })
     .catch(err => {
-    //   dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LOGIN_FAIL
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: {type:"error", content: "login failed."}
       });
     });
 };
@@ -68,7 +69,10 @@ export const logout = () => (dispatch, getState) => {
       });
     })
     .catch(err => {
-    //   dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: SET_MESSAGE,
+        payload: {type:"error", content: "logout failed."}
+      });
     });
 };
 

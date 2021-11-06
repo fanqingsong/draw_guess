@@ -16,7 +16,7 @@ import {
 const { Title } = Typography;
 
 
-export class Guess extends Component {
+export default class Guess extends Component {
     state = {
         room_name: "drawing_broadcaster",
         chatDrawerVisible: false,

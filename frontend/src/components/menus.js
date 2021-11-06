@@ -48,6 +48,12 @@ const Menus = (props) => {
                     Guess
                 </Link>
             </Menu.Item>
+
+            <Menu.Item key="/gallery">
+                <Link to="/gallery" className="nav-link">
+                    Gallery
+                </Link>
+            </Menu.Item>
         </Menu>
     );
 };

@@ -278,34 +278,40 @@ class Draw extends Component {
                 <Space style={{ width: '100%' }}>
                     <Button
                         type="primary"
+                        size="large"
                         icon={<UndoOutlined />}
                         disabled={!this.state.canUndo}
                         onClick={() => this._undo()}
                     />
                     <Button
                         type="primary"
+                        size="large"
                         icon={<RedoOutlined />}
                         disabled={!this.state.canRedo}
                         onClick={() => this._redo()}
                     />
                     <Button
                         type="primary"
+                        size="large"
                         icon={<DeleteOutlined />}
                         onClick={() => this._clear()}
                     />
                     <Button
                         type="primary"
+                        size="large"
                         icon={<SaveOutlined />}
                         onClick={() => this._save()}
                     />
                     <Button
                         type="primary"
+                        size="large"
                         icon={<SettingOutlined />}
                         onClick={() => this._showSettingDrawer()}
                     />
                     <Badge count={this.state.chatCount} showZero>
                         <Button
                             type="primary"
+                            size="large"
                             icon={<MailOutlined />}
                             onClick={() => this._showChatDrawer()}
                         />

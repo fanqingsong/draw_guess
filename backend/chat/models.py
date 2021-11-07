@@ -11,3 +11,14 @@ class Drawings(models.Model):
 
     class Meta:
         managed = True
+
+
+class Comments(models.Model):
+    drawing = models.ForeignKey(Drawings, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.CharField(max_length=32767)
+
+    class Meta:
+        managed = True
+
+

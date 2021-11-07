@@ -14,6 +14,7 @@ urlpatterns = [
 
 router = DefaultRouter()
 router.register(r'drawings', views.DrawingViewSet)
+router.register(r'comments', views.CommentViewSet)
 
 chat_api_urlpatterns = [
     url(r'^api/v1/', include(router.urls)),

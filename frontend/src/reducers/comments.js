@@ -3,21 +3,14 @@ import {
 } from "../actions/types";
 
 const initialState = {
-    all: [],
-    one: null,
+    all: [], // for one drawing
 };
 
 const actionMap = {
-    DRAWINGS_LOADED: (state, action) => {
+    DRAWING_COMMENTS_LOADED: (state, action) => {
         return {
             ...state,
             all: action.payload
-        };
-    },
-    DRAWING_LOADED: (state, action) => {
-        return {
-            ...state,
-            one: action.payload
         };
     },
 };

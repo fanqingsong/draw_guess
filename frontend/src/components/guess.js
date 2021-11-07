@@ -95,6 +95,7 @@ export default class Guess extends Component {
                     <Badge count={this.state.chatCount} showZero>
                         <Button
                             type="primary"
+                            size="large"
                             icon={<MailOutlined />}
                             onClick={() => this._showChatDrawer()}
                         />

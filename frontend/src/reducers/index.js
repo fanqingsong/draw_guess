@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import auth from "./auth";
 import drawings from "./drawings";
 import message from "./message";
+import comments from "./comments";
 
 // console.log("----------------------")
 // console.log(auth)
@@ -9,5 +10,6 @@ import message from "./message";
 export default combineReducers({
   auth,
   drawings,
+  comments,
   message,
 });

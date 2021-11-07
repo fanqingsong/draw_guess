@@ -1,17 +1,16 @@
 
 import axios from "axios";
 import { 
-  DRAWINGS_LOADED,
-  DRAWING_LOADED,
+  DRAWING_COMMENTS_LOADED,
   SET_MESSAGE,
 } from "./types";
 
-export const loadDrawings = () => (dispatch, getState) => {
+export const loadComments = () => (dispatch, getState) => {
   return axios
-    .get("http://127.0.0.1:8000/api/v1/drawings/", tokenConfig(getState))
+    .get("http://127.0.0.1:8000/api/v1/comments/", tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: DRAWINGS_LOADED,
+        type: DRAWING_COMMENTS_LOADED,
         payload: res.data
       });
     })
@@ -20,64 +19,49 @@ export const loadDrawings = () => (dispatch, getState) => {
     });
 };
 
-
-export const loadDrawing = (id) => (dispatch, getState) => {
-  return axios
-    .get("http://127.0.0.1:8000/api/v1/drawings/"+id, tokenConfig(getState))
-    .then(res => {
-      dispatch({
-        type: DRAWING_LOADED,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-    //   dispatch(returnErrors(err.response.data, err.response.status));
-    });
-};
-
-
-// save drawing to db
-export const saveDrawing = (content, title) => (dispatch, getState) => {
+// save Comment to db
+export const saveComment = (content, drawingId) => (dispatch, getState) => {
     let user = getState().auth.me.id;
+    let drawing = drawingId;
 
     return axios
-      .post("http://127.0.0.1:8000/api/v1/drawings/", {
-          title,
+      .post("http://127.0.0.1:8000/api/v1/comments/", {
+          drawing,
           content,
           user     
       }, tokenConfig(getState))
       .then(res => {
         dispatch({
           type: SET_MESSAGE,
-          payload: {type:"success", content: "drawing saving is successful."}
+          payload: {type:"success", content: "Comment saving is successful."}
         });
       })
       .catch(err => {
         dispatch({
           type: SET_MESSAGE,
-          payload: {type:"error", content: "drawing saving is failed."}
+          payload: {type:"error", content: "Comment saving is failed."}
         });
       });
   };
 
 
 
-// delete one drawing from db
-export const deleteDrawing = (id) => (dispatch, getState) => {
+// delete one Comment from db
+export const deleteComment = (id) => (dispatch, getState) => {
   let user = getState().auth.me.id;
 
   return axios
-    .delete("http://127.0.0.1:8000/api/v1/drawings/"+id, tokenConfig(getState))
+    .delete("http://127.0.0.1:8000/api/v1/comments/"+id, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: SET_MESSAGE,
-        payload: {type:"success", content: "drawing deleting is successful."}
+        payload: {type:"success", content: "Comment deleting is successful."}
       });
     })
     .catch(err => {
       dispatch({
         type: SET_MESSAGE,
-        payload: {type:"error", content: "drawing deleting is failed."}
+        payload: {type:"error", content: "Comment deleting is failed."}
       });
     });
 };

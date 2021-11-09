@@ -3,6 +3,7 @@ import axios from "axios";
 
 import {
   ME_LOADED,
+  ALL_USERS_LOADED,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
@@ -13,11 +14,24 @@ import {
 
 // CHECK TOKEN & LOAD ME
 export const loadMe = () => (dispatch, getState) => {
-  axios
+  return axios
     .get("http://127.0.0.1:8000/api/v1/users/medetail", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: ME_LOADED,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+    });
+};
+
+export const loadAllUsers = () => (dispatch, getState) => {
+  return axios
+    .get("http://127.0.0.1:8000/api/v1/users/", tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: ALL_USERS_LOADED,
         payload: res.data
       });
     })

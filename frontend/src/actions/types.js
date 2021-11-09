@@ -1,5 +1,5 @@
 export const ME_LOADED = "ME_LOADED";
-export const AUTH_ERROR = "AUTH_ERROR";
+export const ALL_USERS_LOADED = "ALL_USERS_LOADED";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";

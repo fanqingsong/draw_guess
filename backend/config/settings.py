@@ -61,7 +61,8 @@ REST_FRAMEWORK = {
 
 # configure Djoser
 DJOSER = {
-    "USER_ID_FIELD": "username"
+    # "USER_ID_FIELD": "username",
+    "HIDE_USERS": False,
 }
 
 CORS_ALLOWED_ORIGINS = [

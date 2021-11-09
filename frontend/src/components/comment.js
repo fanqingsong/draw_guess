@@ -10,6 +10,9 @@ import { Comment, Avatar } from 'antd';
 import { connect } from "react-redux";
 import {loadDrawing} from "../actions/drawBoard"
 import { loadComments, saveComment } from "../actions/comments";
+import { loadAllUsers } from "../actions/auth";
+
+import { UserOutlined } from '@ant-design/icons';
 
 import moment from 'moment';
 
@@ -21,14 +24,24 @@ const { Title } = Typography;
 const { TextArea } = Input;
 
 
-const CommentList = ({ comments }) => (
+const CommentList = ({ comments, allUsers }) => {
+    comments.forEach(one => {
+        const userId = one.user;
+        const user = allUsers.find(oneUser => oneUser.id === userId);
+        if(user) {
+            one.author = user.username;
+        }
+        one.avatar = (<Avatar size="small" icon={<UserOutlined />} />)
+    })
+
+    return (
         <List
             dataSource={comments}
             header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
             itemLayout="horizontal"
             renderItem={props => <Comment {...props} />}
         />
-    );
+    )};
 
 const Editor = ({ onChange, onSubmit, submitting, commentToSubmit }) => (
         <>
@@ -55,7 +68,9 @@ class CommentComp extends Component {
             this._sketch.addImg(this.props.oneDrawing.content);
         })
 
-        this.props.loadComments();
+        this.props.loadAllUsers().then(()=>{
+            this.props.loadComments();
+        });
     }
 
     handleSubmit = () => {
@@ -90,6 +105,11 @@ class CommentComp extends Component {
     render() {
         const { submitting, commentToSubmit } = this.state;
         const comments = this.props.comments;
+        const allUsers = this.props.allUsers;
+        const me = this.props.me;
+        const { oneDrawing } = this.props;
+
+        const comments_filtered = comments.filter((one) => one.drawing === oneDrawing.id )
 
         return (
             <Fragment>
@@ -101,9 +121,9 @@ class CommentComp extends Component {
                     style={{background: "azure"}}
                     ref={(c) => (this._sketch = c)}/>
                     
-                {comments.length > 0 && <CommentList comments={comments} />}
+                {comments_filtered.length > 0 && <CommentList comments={comments_filtered} allUsers={allUsers}/>}
                 <Comment
-                    avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
+                    avatar={<Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} alt={me.username}/>}
                     content={
                         <Editor
                             onChange={this.handleChange}
@@ -122,6 +142,13 @@ class CommentComp extends Component {
 const mapStateToProps = (state) => ({
     oneDrawing: state.drawings.one,
     comments: state.comments.all,
+    allUsers: state.auth.allUsers,
+    me: state.auth.me,
 })
 
-export default connect(mapStateToProps, {loadDrawing, loadComments, saveComment})(CommentComp);
+export default connect(mapStateToProps, {
+    loadDrawing, 
+    loadComments, 
+    loadAllUsers,
+    saveComment
+})(CommentComp);

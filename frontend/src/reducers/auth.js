@@ -1,5 +1,6 @@
 import {
     ME_LOADED,
+    ALL_USERS_LOADED,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
@@ -8,7 +9,8 @@ import {
 const initialState = {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
-    me: null
+    me: null,
+    allUsers: [],
 };
 
 const actionMap = {
@@ -17,6 +19,12 @@ const actionMap = {
             ...state,
             isAuthenticated: true,
             me: action.payload
+        };
+    },
+    ALL_USERS_LOADED: (state, action) => {
+        return {
+            ...state,
+            allUsers: action.payload
         };
     },
     LOGIN_SUCCESS: (state, action) => {

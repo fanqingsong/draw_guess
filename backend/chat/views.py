@@ -30,17 +30,17 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def query(self, request):
-        print("-------------------")
-        print(request.query_params)
+        # print("-------------------")
+        # print(request.query_params)
 
         drawing = request.query_params["drawing"]
-        print("=====")
-        print(drawing)
+        # print("=====")
+        # print(drawing)
 
-        queryset = Comments.objects.filter(drawing=drawing).order_by('id')
-        
-        # target = get_list_or_404(queryset)
-        serializer = CommentsSerializer(queryset, many=True)
+        querydata = Comments.objects.filter(drawing=drawing).order_by('id')
+
+        serializer = CommentsSerializer(querydata, many=True)
+
         return Response(serializer.data)
 
 

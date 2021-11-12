@@ -69,7 +69,7 @@ class CommentComp extends Component {
         })
 
         this.props.loadAllUsers().then(()=>{
-            this.props.loadComments();
+            this.props.loadComments(this.props.drawingId);
         });
     }
 
@@ -86,7 +86,7 @@ class CommentComp extends Component {
         });
 
         saveComment(commentToSubmit, drawingId).then(() => {
-            loadComments();
+            loadComments(this.props.drawingId);
 
             this.setState({
                 submitting: false,

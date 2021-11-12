@@ -5,9 +5,11 @@ import {
   SET_MESSAGE,
 } from "./types";
 
-export const loadComments = () => (dispatch, getState) => {
+export const loadComments = (drawingId) => (dispatch, getState) => {
+  let query_part = `query?drawing=${drawingId}`
+
   return axios
-    .get("http://127.0.0.1:8000/api/v1/comments/", tokenConfig(getState))
+    .get(`http://127.0.0.1:8000/api/v1/comments/${query_part}`, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: DRAWING_COMMENTS_LOADED,
